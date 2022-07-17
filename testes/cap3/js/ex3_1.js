@@ -23,7 +23,7 @@ function calcularMedia() {
         outSituacao.style.color = "green";
     } else {
         outSituacao.textContent = "Nossa, que pena, " + inNome.value + ". Você foi Reprovado :(";
-        outSituacao.style.color = "red"
+        outSituacao.style.color = "red";
     }
 }
 
