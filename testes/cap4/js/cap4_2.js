@@ -11,7 +11,7 @@ function decrescerNumeros() {
         } else {
             resultado = resultado + i + ", ";
         }
-    */    
+    */
     }
 
     resultado = resultado + i + ".";
