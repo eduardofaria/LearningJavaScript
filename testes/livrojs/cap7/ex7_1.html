@@ -1,0 +1,14 @@
+<script>
+  // função recebe 2 parâmetros: nota e media
+  function exibirSituacao(nota, media) {
+    if (nota >= media) {   // compara o valor das variáveis
+      alert("Aprovado");   
+    } else {
+      alert("Reprovado");
+    }
+  }
+  var prova1 = Number(prompt("Qual Nota: "));   // lê uma nota
+
+  // chama a função exibirSituacao passando 2 parâmetros
+  exibirSituacao(prova1, 7);
+</script>

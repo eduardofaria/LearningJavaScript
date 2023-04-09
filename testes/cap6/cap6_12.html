@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Datas de Parcelas</title>
+</head>
+<body>
+    
+    <script>
+        let qtdParcelas = Number(prompt("Qual o número de parcelas?"));
+        let hoje = new Date();
+        let checkDate = new Date(); // data para verificar se há dia 29 de fevereiro naquele ano
+        let pgtDia = hoje.getDate();
+        let pgtMes = hoje.getMonth() + 1;
+        let pgtAno = hoje.getFullYear();
+        let fixDay = false;
+
+        let saida = "";
+
+        for (let i = 1; i <= qtdParcelas; i++){
+
+            //verifica o mês de fevereiro, se há dia 29 aquele ano
+            if (pgtMes == 2 && (pgtDia == 29 || pgtDia == 30 || pgtDia == 31)){
+                checkDate.setFullYear(pgtAno);
+                checkDate.setMonth(2);
+                checkDate.setDate(0);
+                pgtDia = checkDate.getDate();
+                fixDay = true;
+            }
+
+            //verifica os meses que não tem dia 31
+            if (pgtDia == 31 && (pgtMes == 3 || pgtMes == 4 || pgtMes == 6 || pgtMes == 9 || pgtMes == 11)){
+                pgtDia = 30;
+                fixDay = true;
+            }
+
+            //vira o ano do calendário e reomeça a contagem dos meses
+            if (pgtMes == 13){
+                pgtMes = 1;
+                pgtAno += 1;
+            }
+
+            saida += i + "ª Parcela: " + pgtDia + "/" + pgtMes + "/" + pgtAno + "\n";
+            pgtMes += 1
+
+            //após tudo verificado, retorna a contagem normal
+            if (fixDay == true) {
+                pgtDia = hoje.getDate();
+                checkDate = new Date();
+                fixDay = false;
+            }
+        }
+        alert(saida);
+
+
+
+/*
+ Eu fiz do meu próprio jeito, pois o código do autor nesse exercício 
+ me pareceu confuso, não havia uma lógica natural no algoritmo usado, 
+ veja o que ele fez na variável diaZero e mesZero, não é natural. 
+ Além dele não ter previsto bugs que eu solucionei no meu código, tal como 
+ anos bissextos, além dele ter driblado os dias 31 em meses de 30 dias, o que 
+ não resolve, apenas disfarça, veja:
+
+
+ 
+        var parcelas = Number(prompt("Quantas Parcelas? "));
+
+        var lista = "";                         // irá acumular as parcelas
+        var dia, mes, ano, diaZero, mesZero;
+
+        var data = new Date();                   // data atual
+
+        for (var i = 1; i <= parcelas; i++) {
+            data.setMonth(data.getMonth() + 1);    // aumenta um mês na data
+            dia = data.getDate();
+            mes = data.getMonth() + 1;             // mês varia de 0 a 11, por isso, +1
+            ano = data.getFullYear();
+
+            diaZero = dia < 10 ? "0" + dia : dia;  // acrescenta 0 se dia menor que 10
+            mesZero = mes < 10 ? "0" + mes : mes;  // acrescenta 0 se mês menor que 10
+
+            // concatena as parcelas na variável linha, com uma quebra de linha ao final
+            lista += i + "ª Parcela: " + diaZero + "/" + mesZero + "/" + ano + "\n";
+        }
+
+        alert(lista);                            // exibe as parcelas
+        */
+
+    </script>
+
+
+</body>
+</html>

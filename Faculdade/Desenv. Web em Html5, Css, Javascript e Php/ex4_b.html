@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<title>Requisição XMLHttpRequest</title>
+</head>
+<body>
+	<h1>Imagens Aleatórios de Cachorros</h1>
+	<p>A partir do click no botão abaixo uma nova imagem aleatória de cachorros será carregada utilizando requisições assíncronas com XMLHttpRequest</p>
+    
+	<img id="img_dog" src="" alt="Aguardando a imagem ser carregada" />
+	<br/>
+	<button onclick="carregarImagens()">Carregar Imagens</button>
+</body>
+	<script type="text/javascript">
+
+		function carregarImagens(){
+                  
+			var url = "https://dog.ceo/api/breeds/image/random" 
+			fetch(url, { 
+				method: 'get' /* Tal parâmetro, inclusive, é opcional.
+                Veja a linha 21, onde declaramos o GET, que é o método padrão. Além desse parâmetro, há outros disponíveis; */
+			})
+			.then(function(response) { 
+				response.json().then(function(data){ /* foi utilizado o objeto correspondente ao tipo de dado retornado pela requisição – nesse caso, JSON.
+                    Há outros tipos de objetos, como texto e até mesmo bytes, sendo possível, por exemplo, carregar imagens, arquivos pdf, entre outros. */
+					console.log('Resultado da Requisição: ' + data.message); 
+                          
+					var imgDog = document.getElementById("img_dog");
+					imgDog.src = data.message;
+				});
+			})
+			.catch(function(err) { 
+				console.error('O seguinte erro ocorreu durante a requisição: ' + err);
+			});
+    
+		}
+	</script>
+</html>
