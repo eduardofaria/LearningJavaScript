@@ -66,3 +66,61 @@ function desCriptografar() {
 
 let btnDesCrip = document.getElementById("btnDesCrip");
 btnDesCrip.addEventListener("click", desCriptografar);
+
+
+
+// EXERCÍCIO B
+
+let inAutor = document.getElementById("inAutor");
+let outBiblio = document.getElementById("outBiblio");
+
+function criarBiblioName(){
+    let autorName = inAutor.value;
+    onlyText(inAutor);
+    if(autorName.indexOf(" ") == -1) {
+        alert("Informe o nome completo");
+        inAutor.focus();
+        return;
+    }
+    
+    let iniciais = [];
+    iniciais[0] = autorName.charAt(0);
+    
+    for (let i = 0; i < autorName.length; i++) {
+
+        if (autorName.charAt(i) == " ") {
+            iniciais.push(autorName.charAt(i + 1));
+        }
+    }
+    iniciais.pop(-1); // remove inicial do último sobrenome
+    
+    let sobrenome = [];
+    for (let i = autorName.length; i > 0; i--){
+        sobrenome.push(autorName.charAt(i));
+        if(autorName.charAt(i) == " "){
+            i = 0;
+        }
+    }
+    sobrenome.reverse(); // coloca o sobrenome em ordem
+    let biblioName = sobrenome.join("") + ", " + iniciais.join(". ") + ".";
+    if (iniciais.length == 1){//elimina dois pontos no final se só houver uma abreviação
+        //biblioName.charAt(-1) = "";
+    }
+    //biblioName.charAt(-1) = ""; // remove espaço no final
+    outBiblio.textContent = "Citação Bibliográfica: " + biblioName.toUpperCase();
+}
+
+let btnMakeBliblio = document.getElementById("btnMakeBliblio");
+btnMakeBliblio.addEventListener("click", criarBiblioName);
+
+
+
+
+// criei essa função para verificar o campo para todos os exercícios que só precisem desses condições
+function onlyText(msg) {
+    if (msg.value == "" || !isNaN(msg.value)){
+        alert("Preencha o campo corretamente");
+        msg.focus();
+        return;
+    }
+}
