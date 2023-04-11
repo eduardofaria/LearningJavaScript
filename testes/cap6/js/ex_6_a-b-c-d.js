@@ -114,6 +114,59 @@ let btnMakeBliblio = document.getElementById("btnMakeBliblio");
 btnMakeBliblio.addEventListener("click", criarBiblioName);
 
 
+// EXERCÍCIO C
+let inPalavra = document.getElementById("inPalavra");
+let outPalavra = document.getElementById("outPalavra");
+
+function verifyPoli() {
+    let frase = inPalavra.value;
+    let noSpace = "";
+
+    onlyText(inPalavra);
+    
+    for (let i=0; i < frase.length; i++){
+        if(frase.charAt(i) !== " "){
+            noSpace += frase.charAt(i).toUpperCase();
+        }
+        /*
+        O AUTOR USOU REGEX KKKK GOD! Esqueci disso hauahauhaua Eu usei um FOR e um IF para fazer o mesmo.
+        //retira os espaços em branco da frase
+        var frase2 = frase.replace(/ /g, "");
+        */
+    }
+    
+    let reversed = "";
+
+    for (let i = (noSpace.length - 1); i >= 0; i--){
+        reversed += noSpace.charAt(i);
+    }
+    
+    if (noSpace == reversed) {
+        outPalavra.textContent = frase.toUpperCase() + " é um Palíndromo"
+    } else {
+        outPalavra.textContent = frase.toUpperCase() + " não é um Palíndromo"
+    }
+
+}
+
+let btnVerify = document.getElementById("btnVerify");
+btnVerify.addEventListener("click", verifyPoli);
+
+/* O exercício C me ensinou que tenho muito o que melhorar no algoritmo.
+Não que eu esteja errando na lógica, mas há caminhos mais simples
+e só vou melhorar, e pegar esses caminhos quando tiver um arsenal
+maior no que diz respeito a conhecimento da sintaxe.
+
+Eu esqueço os métodos que não uso com frequência na hora de montar
+meu algoritmo e me apego aos métodos que já conheço e tento usa-los sempre.
+
+Mas vou melhorar nisso.
+
+*/
+
+
+
+
 
 
 // criei essa função para verificar o campo para todos os exercícios que só precisem desses condições
