@@ -165,6 +165,44 @@ Mas vou melhorar nisso.
 */
 
 
+// EXERCÍCIO D
+let inData = document.getElementById("inData");
+let inValor = document.getElementById("inValor");
+let outDataLimite = document.getElementById("outDataLimite");
+let outValor = document.getElementById("outValor");
+
+function calcularMulta(){
+    let dataInf = inData.value;
+    let valor = Number(inValor.value);
+
+    if(dataInf == "" || valor == 0 || isNaN(valor)) {
+        alert("Preencha os campos corretamente.")
+        inData.value = "";
+        inValor.value = "";
+        inValor.focus();
+        return;
+    }
+
+    let diaMesAno = dataInf.split("-");
+
+    let dataLimite = new Date();
+    let data = new Date();
+
+    data.setDate(diaMesAno[2]);
+    data.setMonth(diaMesAno[1] - 1);
+    data.setFullYear(diaMesAno[0]);
+    dataLimite = data;
+
+    dataLimite.setDate(data.getDate() + 90); //Avança em 90 dias
+ 
+    let comDesconto = valor.toFixed(2) - ((valor.toFixed(2) * 20) / 100); // Valor com desconto
+
+    outDataLimite.textContent = "Data limite para pagto com desconto: " + (dataLimite.getDate() < 10 ? "0" + dataLimite.getDate() : dataLimite.getDate()) +"/" + ((dataLimite.getMonth() + 1) < 10 ? "0" + (dataLimite.getMonth() + 1) : (dataLimite.getMonth() + 1))  + "/" + dataLimite.getFullYear();
+    outValor.textContent = "Valor com Desconto R$: " + comDesconto.toFixed(2);
+}
+
+let btnCalcular = document.getElementById("btnCalcular");
+btnCalcular.addEventListener("click", calcularMulta);
 
 
 
