@@ -201,10 +201,9 @@ function calcularMulta(){
     outValor.textContent = "Valor com Desconto R$: " + comDesconto.toFixed(2);
 }
 
+
 let btnCalcular = document.getElementById("btnCalcular");
 btnCalcular.addEventListener("click", calcularMulta);
-
-
 
 
 // criei essa função para verificar o campo para todos os exercícios que só precisem desses condições
