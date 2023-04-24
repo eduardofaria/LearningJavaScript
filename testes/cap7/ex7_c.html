@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .oculto {display: none;}
+        .visivel {display: inline;}
+    </style>
+    <title>Exercício 7 - C</title>
+</head>
+<body>
+    <h1>Veterinária</h1>
+    <hr>
+    <p>Valor da Vacina: <input type="text" name="" id="in_valor"></p>
+    <p>Possui convênio: 
+        <input type="radio" name="rb_convenio" id="rb_sim"> Sim
+        <input type="radio" name="rb_convenio" id="rb_nao" checked> Não
+    </p>
+    <p id="area_convenio" class="oculto">
+        <select id="sl_convenio">
+            <option value="opt_1">Amigo dos Animais</option>
+            <option value="opt_2">Saúde Animal</option>
+        </select>
+    </p>
+    <p><input type="button" value="Calcular Desconto" id="btn_calcularDesc"></p>
+    <h5 id="out_desc"></h5>
+    <h4 id="out_pagar"></h4>
+
+    <script src="js/ex7_c.js"></script>
+</body>
+</html>
