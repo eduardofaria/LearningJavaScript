@@ -1,11 +1,10 @@
-var in_valor = document.getElementById("in_valor");
-var rb_sim = document.getElementById("rb_sim");
-var rb_nao = document.getElementById("rb_nao");
-var desconto = "";
+let in_valor = document.getElementById("in_valor");
+let rb_sim = document.getElementById("rb_sim");
+let rb_nao = document.getElementById("rb_nao");
 
 // verifica o preenchimento e retorna o valor inserido
 function valor_total(){
-    var valor = Number(in_valor.value);
+    let valor = Number(in_valor.value);
     if (valor == 0 || isNaN(valor)){
         alert("Preencha o valor da vacina.");
         in_valor.focus();
@@ -17,18 +16,23 @@ function valor_total(){
 // define o tipo de desconto
 function definir_desconto(){
     let area_convenio = document.getElementById("area_convenio");
+    let desconto = rb_sim.checked ? document.getElementById("sl_convenio").value : "opt_0";
+    /** 
+     O uso de operador ternário substituiu:
+     
     if (rb_sim.checked) {
         let sl_convenio = document.getElementById("sl_convenio");
         var desconto = sl_convenio.value;
     } else if (rb_nao.checked) {
         var desconto = "opt_0";
     }
+     **/
     return desconto;
 }
 
 // define o valor do desconto
 function taxa_desconto() {
-    var opt_taxa = [10, 20, 50];
+    let opt_taxa = [10, 20, 50];
     if (definir_desconto() == "opt_0"){
         return opt_taxa[0];
     } else if (definir_desconto() == "opt_1") {
