@@ -16,7 +16,7 @@ let clube =  function seleciona_clube(storage){ // Define qual o clube seleciona
         clube_selecionado = "Farroupilha";
     }
     if (!rb_brasil.checked && !rb_pelotas.checked && !rb_farroupilha.checked){
-        clube_selecionado = (clube_salvo)? clube_salvo : null; // se não houver nada armazenado ou selecionado
+        clube_selecionado = (clube_salvo)? clube_salvo : false; // se não houver nada armazenado ou selecionado
     }
     return clube_selecionado;
 }
@@ -35,4 +35,4 @@ rb_pelotas.addEventListener("change", troca_clube);
 rb_farroupilha.addEventListener("change", troca_clube);
 
 let clube_salvo = localStorage.getItem("clube"); // verifica se há uma seleção armasenada previamente
-(clube_salvo)? troca_clube() : clube = null;
+(clube_salvo)? troca_clube() : clube_salvo = false;
