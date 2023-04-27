@@ -23,7 +23,7 @@ let clube = function seleciona_clube(){ // Define qual o clube selecionado
     return clube_selecionado;
 }
 
-function troca_clube () { // Faz todas as modificações de estilo de acordo com o clube
+function troca_clube () { // Faz todas as modificações de estilo de acordo com o clube selecionado
     muda_pagina(clube());
     localStorage.setItem("clube", clube());
 }
@@ -38,13 +38,13 @@ function carrega_clube (selecao){ // Mudao radio button selecionado de acordo co
 }
 
 function muda_pagina(selecao){
-    if (selecao != null || selecao != "Nenhum") {
+    if (selecao != "Nenhum") {
         div_header.className = "cor_" + selecao;
         logo_clube.src = "img/" + selecao.toLocaleLowerCase() + ".png";
         logo_clube.className = "visivel";
         logo_clube.alt = "Símbolo do " + selecao;
     } else if (selecao == null || selecao == "Nenhum" ){
-        div_header.className = "";
+        div_header.className = "cor_" + selecao;
         logo_clube.src = "";
         logo_clube.className = "oculto";
         logo_clube.alt = "";
