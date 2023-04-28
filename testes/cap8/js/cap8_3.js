@@ -14,7 +14,7 @@ if (localStorage.getItem("Apostas")){
         aposta_exibir(apostas_salvas[i], apostas_salvas[i + 1]);
     }   
 } else {
-    apostas_salvas = [];
+    apostas_salvas = []; // Sem histórico, zera tudo
     apostas_lista = "";
 }
 
@@ -48,9 +48,14 @@ function aposta_cadastrar_in(){
     
     apostas_salvas.push(aposta[0], aposta[1]);
     aposta_exibir(aposta[0], aposta[1]);
-    
     localStorage.setItem("Apostas", apostas_salvas);
+
+    in_nome.value = "";
+    in_peso.value = "";
+    in_nome.focus();
+
 }
+
 function aposta_definir_ganhador(){
     let peso_melancia = Number(prompt("Qual o peso da melancia?"));
     let apostas = [];
@@ -59,22 +64,27 @@ function aposta_definir_ganhador(){
     }
     
     let menor_diferenca = Math.min(...apostas); //Spread syntax (...)
-    console.log("apostas_salvas: " + apostas_salvas + "\n");
-    console.log("apostas: " + apostas + "\n");
-    console.log("menor_diferenca: " + menor_diferenca + "\n");
-    console.log("index apostas: " + apostas.indexOf(menor_diferenca) + "\n");
-    
-    let index_sorteado = (apostas.indexOf(menor_diferenca)*2)
- 
-alert("Resultado - Peso correto: " + peso_melancia + "gr \n" + "-------------------------------------\n" +
-     "Vencedor: " + apostas_salvas[index_sorteado] + "\n" + "Apostou: " + apostas_salvas[index_sorteado + 1]);     
+    if ((apostas.indexOf(menor_diferenca)) != (apostas.lastIndexOf(menor_diferenca))) { //Tratando um caso de empate
+        let index_sorteado_1 = (apostas.indexOf(menor_diferenca)*2);
+        let index_sorteado_2 = (apostas.lastIndexOf(menor_diferenca)*2); // Só é possível empate entre 2 (o que acertou pra mais ou menos)
+        alert("Resultado - Peso correto: " + peso_melancia + "gr \n" + "-------------------------------------\n" +
+        "TIVEMOS UM EMPATE! \n" + "-------------------------------------\n" +
+        "Vencedor 1: " + apostas_salvas[index_sorteado_1] + "\n" + "Apostou: " + apostas_salvas[index_sorteado_1 + 1] +
+         "\n" + "-------------------------------------\n" +
+        "Vencedor 2: " + apostas_salvas[index_sorteado_2] + "\n" + "Apostou: " + apostas_salvas[index_sorteado_2 + 1]);  
+
+    } else {
+        let index_sorteado = (apostas.indexOf(menor_diferenca)*2);
+        alert("Resultado - Peso correto: " + peso_melancia + "gr \n" + "-------------------------------------\n" +
+        "Vencedor: " + apostas_salvas[index_sorteado] + "\n" + "Apostou: " + apostas_salvas[index_sorteado + 1]);  
+    }
+    aposta_limpar()
 }
 
 function aposta_exibir (nome, aposta){
     apostas_lista += `${nome} - ${aposta}gr\n`
     out_apostas.textContent = apostas_lista;
 }
-
 
 function aposta_limpar(){
     localStorage.removeItem("Apostas");
@@ -85,7 +95,6 @@ function aposta_limpar(){
     in_peso.value = "";
     in_nome.focus();
 }
-
 
 let btn_apostar = document.getElementById("btn_apostar");
 btn_apostar.addEventListener("click", aposta_cadastrar_in);
