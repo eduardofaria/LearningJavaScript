@@ -4,7 +4,7 @@ let out_apostas = document.getElementById("out_apostas");
 let apostas_salvas = [];
 let apostas_lista;
 
-if (localStorage.getItem("Apostas")){
+if (localStorage.getItem("Apostas")){ //Verifica se há histórico salvo no storage e o restaura
     apostas_lista = "";
     let apostas_storage = localStorage.getItem("Apostas").split(",");
     for (let i = 0; i < apostas_storage.length; i++){
@@ -14,11 +14,11 @@ if (localStorage.getItem("Apostas")){
         aposta_exibir(apostas_salvas[i], apostas_salvas[i + 1]);
     }   
 } else {
-    apostas_salvas = []; // Sem histórico, zera tudo
+    apostas_salvas = []; // Se não houver lista anterior, zera tudo da memória
     apostas_lista = "";
 }
 
-function verificar_preenchimento(){
+function verificar_preenchimento(){ // verifica preenchimento sem campos vazios
     let nome = in_nome.value;
     let peso = Number(in_peso.value);
     if(nome == ""){
@@ -30,23 +30,23 @@ function verificar_preenchimento(){
         alert("Informe o peso que deseja apostar.");
         return;
     }
-    let apostador = [nome, peso]
+    let apostador = [nome, peso];
     return apostador;
 }
 
-function aposta_cadastrar_in(){
-    let aposta = verificar_preenchimento().splice(",");
-    if(apostas_salvas.indexOf(aposta[0]) != -1){
+function aposta_cadastrar_in(){ // cadastra a aposta
+    let aposta = verificar_preenchimento().toLocaleString().split(",");
+    if(apostas_salvas.indexOf(aposta[0]) != -1){ // verifica nomes repetidas
         alert("Apostador já cadastrado.");
         return;
     }
 
     if(apostas_salvas.indexOf(aposta[1]) != -1){
-        alert("Peso já apostado.");
+        alert("Peso já apostado."); // verifica apostas repetidas
         return;
     }
     
-    apostas_salvas.push(aposta[0], aposta[1]);
+    apostas_salvas.push(aposta[0], aposta[1]); // efetua o cadastro
     aposta_exibir(aposta[0], aposta[1]);
     localStorage.setItem("Apostas", apostas_salvas);
 
@@ -56,7 +56,7 @@ function aposta_cadastrar_in(){
 
 }
 
-function aposta_definir_ganhador(){
+function aposta_definir_ganhador(){ // Escolhe a aposta mais próxima
     let peso_melancia = Number(prompt("Qual o peso da melancia?"));
     let apostas = [];
     for (let i = 1; i < apostas_salvas.length; i+=2){
@@ -81,12 +81,12 @@ function aposta_definir_ganhador(){
     aposta_limpar()
 }
 
-function aposta_exibir (nome, aposta){
+function aposta_exibir (nome, aposta){ // adiciona apostas a lista
     apostas_lista += `${nome} - ${aposta}gr\n`
     out_apostas.textContent = apostas_lista;
 }
 
-function aposta_limpar(){
+function aposta_limpar(){ // limpa os campos e apaga o que estava salvo
     localStorage.removeItem("Apostas");
     apostas_salvas = [];
     apostas_lista = "";
@@ -96,6 +96,8 @@ function aposta_limpar(){
     in_nome.focus();
 }
 
+
+// botões e suas funções
 let btn_apostar = document.getElementById("btn_apostar");
 btn_apostar.addEventListener("click", aposta_cadastrar_in);
 
