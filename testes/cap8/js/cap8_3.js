@@ -1,14 +1,21 @@
 let in_nome = document.getElementById("in_nome");
 let in_peso = document.getElementById("in_peso");
+let out_apostas = document.getElementById("out_apostas");
 let apostas_salvas = [];
+let apostas_lista;
 
 if (localStorage.getItem("Apostas")){
+    apostas_lista = "";
     let apostas_storage = localStorage.getItem("Apostas").split(",");
     for (let i = 0; i < apostas_storage.length; i++){
         apostas_salvas.push(apostas_storage[i]);
     }
+    for (let i = 0; i < apostas_salvas.length; i+=2) {
+        aposta_exibir(apostas_salvas[i], apostas_salvas[i + 1]);
+    }   
 } else {
     apostas_salvas = [];
+    apostas_lista = "";
 }
 
 function verificar_preenchimento(){
@@ -40,31 +47,40 @@ function aposta_cadastrar_in(){
     }
     
     apostas_salvas.push(aposta[0], aposta[1]);
+    aposta_exibir(aposta[0], aposta[1]);
     
     localStorage.setItem("Apostas", apostas_salvas);
 }
-
 function aposta_definir_ganhador(){
     let peso_melancia = Number(prompt("Qual o peso da melancia?"));
     let apostas = [];
-
     for (let i = 1; i < apostas_salvas.length; i+=2){
         apostas.push(Math.abs(apostas_salvas[i] - peso_melancia));
     }
-
-    let menor_diferenca = Math.min(...apostas); //Spread syntax (...)
     
-    let index_sorteado = apostas_salvas.indexOf((peso_melancia - menor_diferenca).toLocaleString());
+    let menor_diferenca = Math.min(...apostas); //Spread syntax (...)
+    console.log("apostas_salvas: " + apostas_salvas + "\n");
+    console.log("apostas: " + apostas + "\n");
+    console.log("menor_diferenca: " + menor_diferenca + "\n");
+    console.log("index apostas: " + apostas.indexOf(menor_diferenca) + "\n");
+    
+    let index_sorteado = (apostas.indexOf(menor_diferenca)*2)
+ 
+alert("Resultado - Peso correto: " + peso_melancia + "gr \n" + "-------------------------------------\n" +
+     "Vencedor: " + apostas_salvas[index_sorteado] + "\n" + "Apostou: " + apostas_salvas[index_sorteado + 1]);     
+}
 
-    alert("Resultado - Peso correto: " + peso_melancia + "gr \n" + "-------------------------------------\n" +
-     "Vencedor: " + apostas_salvas[index_sorteado - 1] + "\n" + "Apostou: " + apostas_salvas[index_sorteado]);
-        
+function aposta_exibir (nome, aposta){
+    apostas_lista += `${nome} - ${aposta}gr\n`
+    out_apostas.textContent = apostas_lista;
 }
 
 
 function aposta_limpar(){
     localStorage.removeItem("Apostas");
     apostas_salvas = [];
+    apostas_lista = "";
+    out_apostas.textContent = "";
     in_nome.value = "";
     in_peso.value = "";
     in_nome.focus();
