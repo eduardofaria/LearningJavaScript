@@ -40,12 +40,27 @@ function aposta_cadastrar_in(){
     }
     
     apostas_salvas.push(aposta[0], aposta[1]);
-    //console.log("apostas_salvas: " + apostas_salvas + "\n" + "aposta: " + aposta);
     
     localStorage.setItem("Apostas", apostas_salvas);
 }
 
-function aposta_definir_ganhador(){}
+function aposta_definir_ganhador(){
+    let peso_melancia = Number(prompt("Qual o peso da melancia?"));
+    let apostas = [];
+
+    for (let i = 1; i < apostas_salvas.length; i+=2){
+        apostas.push(Math.abs(apostas_salvas[i] - peso_melancia));
+    }
+
+    let menor_diferenca = Math.min(...apostas); //Spread syntax (...)
+    
+    let index_sorteado = apostas_salvas.indexOf((peso_melancia - menor_diferenca).toLocaleString());
+
+    alert("Resultado - Peso correto: " + peso_melancia + "gr \n" + "-------------------------------------\n" +
+     "Vencedor: " + apostas_salvas[index_sorteado - 1] + "\n" + "Apostou: " + apostas_salvas[index_sorteado]);
+        
+}
+
 
 function aposta_limpar(){
     localStorage.removeItem("Apostas");
@@ -55,14 +70,15 @@ function aposta_limpar(){
     in_nome.focus();
 }
 
-function aposta_exibir_ganhador(){}
-
-
 
 let btn_apostar = document.getElementById("btn_apostar");
 btn_apostar.addEventListener("click", aposta_cadastrar_in);
+
 let btn_limpar = document.getElementById("btn_limpar");
 btn_limpar.addEventListener("click", aposta_limpar);
+
+let btn_vencedor = document.getElementById("btn_vencedor");
+btn_vencedor.addEventListener("click", aposta_definir_ganhador);
 
 
 
