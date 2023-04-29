@@ -4,6 +4,7 @@ let out_apostas = document.getElementById("out_apostas");
 let apostas_salvas = [];
 let apostas_lista;
 
+
 if (localStorage.getItem("Apostas")){ //Verifica se há histórico salvo no storage e o restaura
     apostas_lista = "";
     let apostas_storage = localStorage.getItem("Apostas").split(",");
@@ -21,7 +22,7 @@ if (localStorage.getItem("Apostas")){ //Verifica se há histórico salvo no stor
 function verificar_preenchimento(){ // verifica preenchimento sem campos vazios
     let nome = in_nome.value;
     let peso = Number(in_peso.value);
-    if(nome == ""){
+    if(nome == "" || !isNaN(nome)){
         alert("Informe o nome do apostador.");
         in_nome.focus();
         return;
@@ -35,7 +36,11 @@ function verificar_preenchimento(){ // verifica preenchimento sem campos vazios
 }
 
 function aposta_cadastrar_in(){ // cadastra a aposta
-    let aposta = verificar_preenchimento().toLocaleString().split(",");
+    let apostador = verificar_preenchimento();
+    if (!apostador) {
+        return;
+    }
+    let aposta = apostador.toLocaleString().split(",");
     if(apostas_salvas.indexOf(aposta[0]) != -1){ // verifica nomes repetidas
         alert("Apostador já cadastrado.");
         return;
