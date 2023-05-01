@@ -38,13 +38,15 @@ function exibir_lista(itens){
     for (let i = 0; i < lista.length; i++) {
         lista_ordenada += lista[i].charAt(0).toUpperCase() + lista[i].slice(1).toLowerCase() + "\n";
     }
-    out_list.textContent = lista_ordenada;
-    
-    
+    out_list.textContent = lista_ordenada;    
 }
 
 function limpar_lista(){
-    
+    lista_compras = "";
+    localStorage.removeItem("lista");
+    out_list.textContent = "";
+    in_produto.value = "";
+    in_produto.focus();
 }
 
 function add_item (){
