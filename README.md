@@ -1,7 +1,5 @@
-## Agrupo aqui todas as fontes de exercícios que faço em JavaScript.
-Há diretórios de exercícios da Faculdade, da Udemy e de Livros.
+## There are Faculty, Udemy, and Books exercise directories.
 
-- Pasta Faculdade: Exercícios retirados das aulas da faculdade de Análise e Desenvolvimento de Sistemas.
-- Pasta Udemy: Exercícios de Cursos da Udemy.
-- Pasta testes:
-Exercícios feitos do livro: Lógica de Programação e Algoritmos com JavaScript: Uma introdução à programação de computadores com exemplos e exercícios para iniciantes - Edécio Fernando Iepsen.
+- Faculty Folder: Exercises taken from the Systems Analysis and Development faculty classes.
+- Udemy Folder: Udemy Course Exercises.
+- Test folder: Exercises made from the book: Programming Logic and Algorithms with JavaScript: An introduction to computer programming with examples and exercises for beginners - Edécio Fernando Iepsen.
