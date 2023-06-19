@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício Cap 9.1</title>
+    <link rel="stylesheet" href="../cap8/css/bootstrap.min.css">
+    <style>
+        .selecionada {
+            color: red;
+            font-style: italic;
+        }
+        .naoSelecionada {
+            color: black;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert alert-success" role="alert">
+        <strong id="out_alert"></strong>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6" id="div_Quadro">
+                <p>
+                    <h1>Tarefas do Dia</h1>
+                    <label for="inTarefa">Tarefa:</label>
+                    <input type="text" id="in_Tarefa" class="form-control">
+                </p>
+                <div class="btn-area">
+                    <input type="button" id="btn_Add" value="Adicionar" class="btn btn-primary"> 
+                    <input type="button" id="btn_Select" value="Selecionar" class="btn btn-info"> 
+                    <input type="button" id="btn_Delete" value="Retirar Selecionado" class="btn btn-danger"> 
+                    <input type="button" id="btn_Save" value="Gravar" class="btn btn-success">
+                </div>
+                <br>          
+
+            </div>
+        </div>
+    </div>
+        
+    </div>
+    <script src="../cap8/js/bootstrap.min.js"></script>
+    <script src="js/cap9_1.js"></script>
+</body>
+</html>
