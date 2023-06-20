@@ -22,22 +22,57 @@ function adicionarTarefa() {
 let btn_Add = document.getElementById("btn_Add");
 btn_Add.addEventListener("click", adicionarTarefa);
 
+
 let ordem = 0;
 function selecionarTarefa(){
     let div_Quadro = document.getElementById("div_Quadro");
     let lista_Tarefas = div_Quadro.getElementsByTagName("h5");
-    if (ordem == lista_Tarefas.length){
-        lista_Tarefas[0].className = "selecionada";
-        lista_Tarefas[ordem - 1].className = "naoSelecionada";
-        ordem = 0;
-    }
-    if (ordem > 0) {
-        lista_Tarefas[ordem - 1].className = "naoSelecionada";
+    
+    for (let i = 0; i < lista_Tarefas.length; i++) {
+        if (lista_Tarefas[i].className == "selecionada") {
+            ordem = i + 1;
+            break;
+        }
     }
 
-    lista_Tarefas[ordem].className = "selecionada";
-    ordem++;
+    if (ordem >= lista_Tarefas.length) {
+        lista_Tarefas[(ordem - 1)].className = "naoSelecionada";
+        lista_Tarefas[0].className = "selecionada";
+        ordem = 0;
+    } else if (ordem < lista_Tarefas.length) {
+        if (ordem == 0) {
+            lista_Tarefas[(ordem)].className = "selecionada";
+        } else if (ordem > 0){
+            lista_Tarefas[(ordem - 1)].className = "naoSelecionada";
+            lista_Tarefas[(ordem)].className = "selecionada";
+        }
+    }
 }
 
 let btn_Select = document.getElementById("btn_Select");
 btn_Select.addEventListener("click", selecionarTarefa);
+
+
+function removerTarefa(){
+    let div_Quadro = document.getElementById("div_Quadro");
+    let lista_Tarefas = div_Quadro.getElementsByTagName("h5");
+    let index_Selecionada = -1;
+    for (let i = 0; i < lista_Tarefas.length; i++) {
+        if (lista_Tarefas[i].className == "selecionada") {
+            index_Selecionada = i;
+            break;
+        }
+    }
+
+    if (index_Selecionada != -1) {
+        if (confirm(`Deseja remover a tarefa "${lista_Tarefas[index_Selecionada].textContent}"?`)){
+            div_Quadro.removeChild(lista_Tarefas[index_Selecionada]);
+        }
+    } else if (index_Selecionada == -1) {
+        alert("Selecione uma tarefa.");
+    }
+
+    console.log("index: " + index_Selecionada);
+}
+let btn_Delete = document.getElementById("btn_Delete");
+btn_Delete.addEventListener("click", removerTarefa);
