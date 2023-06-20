@@ -27,6 +27,11 @@ let ordem = 0;
 function selecionarTarefa(){
     let div_Quadro = document.getElementById("div_Quadro");
     let lista_Tarefas = div_Quadro.getElementsByTagName("h5");
+
+    if (lista_Tarefas.length == 0) {
+        alert("Não há tarefas para selecionar.");
+        return;
+    }
     
     for (let i = 0; i < lista_Tarefas.length; i++) {
         if (lista_Tarefas[i].className == "selecionada") {
@@ -74,5 +79,6 @@ function removerTarefa(){
 
     console.log("index: " + index_Selecionada);
 }
+
 let btn_Delete = document.getElementById("btn_Delete");
 btn_Delete.addEventListener("click", removerTarefa);
