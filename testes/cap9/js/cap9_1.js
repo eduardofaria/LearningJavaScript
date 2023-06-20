@@ -23,8 +23,8 @@ let btn_Add = document.getElementById("btn_Add");
 btn_Add.addEventListener("click", adicionarTarefa);
 
 
-let ordem = 0;
 function selecionarTarefa(){
+    let ordem = 0;
     let div_Quadro = document.getElementById("div_Quadro");
     let lista_Tarefas = div_Quadro.getElementsByTagName("h5");
 
