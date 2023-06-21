@@ -82,3 +82,29 @@ function removerTarefa(){
 
 let btn_Delete = document.getElementById("btn_Delete");
 btn_Delete.addEventListener("click", removerTarefa);
+
+let tarefas_regatadas;
+
+function salvar_tarefas(){
+    let div_Quadro = document.getElementById("div_Quadro");
+    tarefas_regatadas = div_Quadro.getElementsByTagName("h5");
+
+    if (tarefas_regatadas.length == 0) {
+        alert("Não há tarefas para serem salvas");
+        return;
+    }
+
+    let tarefas = "";
+    for (let i = 0; i < tarefas_regatadas.length; i++) {
+        tarefas += tarefas_regatadas[i].textContent + ";";
+    }
+    
+    localStorage.setItem("tarefas", tarefas.substring(0, (tarefas.length - 1)));
+
+    if (localStorage.getItem("tarefas")) {
+        alert("Tarefas salvas com sucesso!");
+    }
+}
+let btn_Save = document.getElementById("btn_Save");
+btn_Save.addEventListener("click", salvar_tarefas);
+
