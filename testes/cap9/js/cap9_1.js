@@ -83,20 +83,20 @@ function removerTarefa(){
 let btn_Delete = document.getElementById("btn_Delete");
 btn_Delete.addEventListener("click", removerTarefa);
 
-let tarefas_regatadas;
+let tarefas_resgatadas;
 
 function salvar_tarefas(){
     let div_Quadro = document.getElementById("div_Quadro");
-    tarefas_regatadas = div_Quadro.getElementsByTagName("h5");
+    tarefas_resgatadas = div_Quadro.getElementsByTagName("h5");
 
-    if (tarefas_regatadas.length == 0) {
+    if (tarefas_resgatadas.length == 0) {
         alert("Não há tarefas para serem salvas");
         return;
     }
 
     let tarefas = "";
-    for (let i = 0; i < tarefas_regatadas.length; i++) {
-        tarefas += tarefas_regatadas[i].textContent + ";";
+    for (let i = 0; i < tarefas_resgatadas.length; i++) {
+        tarefas += tarefas_resgatadas[i].textContent + ";";
     }
     
     localStorage.setItem("tarefas", tarefas.substring(0, (tarefas.length - 1)));
@@ -107,4 +107,21 @@ function salvar_tarefas(){
 }
 let btn_Save = document.getElementById("btn_Save");
 btn_Save.addEventListener("click", salvar_tarefas);
+
+function restaurar_tarefas(){
+    if (localStorage.getItem("tarefas")) {
+        let div_Quadro = document.getElementById("div_Quadro");
+        tarefas_resgatadas = localStorage.getItem("tarefas").split(";");
+        console.log(tarefas_resgatadas);
+        for (i = 0; i <= tarefas_resgatadas.length; i++){
+           let tarefa = tarefas_resgatadas[i];
+           let h5 = createElement("h5");
+           h5.createTextNode(tarefa);
+           div_Quadro.appendChild(h5);
+        }
+
+    }
+    
+}
+restaurar_tarefas();
 
