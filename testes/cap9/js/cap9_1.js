@@ -72,12 +72,11 @@ function removerTarefa(){
     if (index_Selecionada != -1) {
         if (confirm(`Deseja remover a tarefa "${lista_Tarefas[index_Selecionada].textContent}"?`)){
             div_Quadro.removeChild(lista_Tarefas[index_Selecionada]);
+            salvar_tarefas();
         }
     } else if (index_Selecionada == -1) {
         alert("Selecione uma tarefa.");
     }
-
-    console.log("index: " + index_Selecionada);
 }
 
 let btn_Delete = document.getElementById("btn_Delete");
@@ -112,11 +111,10 @@ function restaurar_tarefas(){
     if (localStorage.getItem("tarefas")) {
         let div_Quadro = document.getElementById("div_Quadro");
         tarefas_resgatadas = localStorage.getItem("tarefas").split(";");
-        console.log(tarefas_resgatadas);
-        for (i = 0; i <= tarefas_resgatadas.length; i++){
-           let tarefa = tarefas_resgatadas[i];
-           let h5 = createElement("h5");
-           h5.createTextNode(tarefa);
+        for (i = 0; i < tarefas_resgatadas.length; i++){
+           let tarefa = document.createTextNode(tarefas_resgatadas[i]);
+           let h5 = document.createElement("h5");
+           h5.appendChild(tarefa);
            div_Quadro.appendChild(h5);
         }
 
