@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 9.3</title>
+    <link rel="stylesheet" href="../cap8/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Meus Filmes Favoritos</h1>
+                <label for="inTitle">Título do Filme:</label>
+                <input type="text" name="numero" id="inTitle" class="form-control">
+                <br>
+                <label for="inGenero">Gênero:</label>
+                <input type="text" name="numero" id="inGenero" class="form-control">
+                <br>
+                <p>
+                    <button id="btnAdd" type="button" class="btn btn-primary">Adicionar</button>
+                </p>
+                <table class="table table-striped" id="tbFilmes">
+                    <tr>
+                        <th>Título do Filme</th>
+                        <th>Gênero</th>
+                        <th>
+                            <label><input type="checkbox" id="ckAll"> Todos </label>
+                        </th>
+                    </tr>
+                </table>
+
+                <p><button id="btnDelete" type="button" class="btn btn-danger">Excluir Selecionados</button></p>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <script src="../cap8/js/bootstrap.min.js"></script>
+    <script src="js/cap9_3.js"></script>
+</body>
+</html>
