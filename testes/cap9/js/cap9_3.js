@@ -12,7 +12,7 @@ function adicionarFilmes() {
 
     let filme = {title: inTitle.value, genero: inGenero.value}
 
-    let tbFilmes = document.getElementById("tbFilmes");
+    var tbFilmes = document.getElementById("tbFilmes");
     
     adicionarLinhaTabela(tbFilmes, filme.title, filme.genero);
     gravarFilme(filme.title, filme.genero);
@@ -67,3 +67,16 @@ function restaurarFilmes() {
     console.log("restaurarFilmes: " + filmesSalvos)
 }
 
+
+function apagarFilmes(){
+    for (let i = 0; i <= tbFilmes.childNodes.length; i++) {
+
+        console.log("nó " + i + " " + tbFilmes.childNodes[i].innerHTML);
+    }
+
+}
+
+
+
+let btnDelete = document.getElementById("btnDelete");
+btnDelete.addEventListener("click", apagarFilmes);
