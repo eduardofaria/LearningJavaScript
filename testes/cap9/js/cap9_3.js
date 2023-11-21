@@ -15,13 +15,14 @@ function adicionarFilmes() {
     let tbFilmes = document.getElementById("tbFilmes");
     
     adicionarLinhaTabela(tbFilmes, filme.title, filme.genero);
-    gravarFilme(filme.title, filme.genero);
+    gravarFilme(tbFilmes);
+    //gravarFilme(filme.title, filme.genero);
 
     inTitle.value = "";
     inGenero.value = "";
     inTitle.focus();
 
-    console.log(filme);
+    //console.log(filme);
 }
 
 
@@ -38,18 +39,20 @@ function adicionarLinhaTabela (tabela, filme, genero){
 
 }
 
-console.log("Reload: " + filmesSalvos)
-function gravarFilme(titulo, genero){
-    filmesSalvos += titulo + ";" + genero + ";";
-    localStorage.setItem("filmes", filmesSalvos); 
-    if (localStorage.getItem("filmes") != filmesSalvos){
-        filmesSalvos = localStorage.getItem("filmes");
-        let arrFilmes = filmesSalvos.split(";");
-        for (let i = 0; i < arrFilmes.length; i = i+2) {
-            adicionarLinhaTabela(tbFilmes, arrFilmes[i], arrFilmes[i+1]);
-        }
-    }  
-    console.log("filmesSalvos: " + filmesSalvos)
+
+function gravarFilme(tabela){
+    if (localStorage.getItem("filmes")) {
+        localStorage.removeItem("filmes")
+    }
+    let linhas = tabela.getElementsByTagName("tr");
+    for (let i = 1; i < linhas.length; i++) {
+        filmesSalvos += tabela.rows[i].cells[0].textContent + ";" + tabela.rows[i].cells[1].textContent + ";";
+    }
+    let filmes = filmesSalvos.split(";");
+    filmes.pop();
+    localStorage.setItem("filmes", filmes); 
+    
+    //console.log("filmesSalvos: " + filmesSalvos)
 }
 
 
@@ -58,12 +61,18 @@ btnAdd.addEventListener("click", adicionarFilmes);
 
 function restaurarFilmes() {
     if (localStorage.getItem("filmes")){
+        let tabela = document.getElementById("tbFilmes")
+        let linhas = tabela.getElementsByTagName("tr");
+        for (let i = 1; i < linhas.length; i++) {
+            tabela.deleteRow(i);
+        }
+
         filmesSalvos = localStorage.getItem("filmes");
-        let arrFilmes = filmesSalvos.split(";");
+        let arrFilmes = filmesSalvos.split(",");
         for (let i = 0; i < arrFilmes.length; i = i+2) {
             adicionarLinhaTabela(tbFilmes, arrFilmes[i], arrFilmes[i+1]);
         }
     }
-    console.log("restaurarFilmes: " + filmesSalvos)
+    //console.log("restaurarFilmes: " + filmesSalvos)
 }
 
